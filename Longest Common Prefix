@@ -1,0 +1,51 @@
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+
+
+var longestCommonPrefix = function(strs) {
+    let prefix = "";
+
+    if(strs.length === 0){
+      return prefix
+    }
+
+    if(strs.length === 1){
+        return strs[0]
+        
+    } else {
+
+    let index = 0;
+    let firstword = strs[0];
+
+    
+    //This for loop iterates through the firstword, hitting each letter
+    for(let x = 0; x < firstword.length; x++){ 
+     
+    //loop through each of the other elements of the array
+      for(let i = 1; i < strs.length; i++){
+        
+        // compares letters and checks if next element of array is not null to signify that we have reached the end of the array
+        if(firstword[index] === strs[i][index]) {
+          if (strs[i+1] == null || strs[i+1] == undefined){
+            prefix += firstword[index]
+            index += 1
+          }
+        }
+         
+        
+        if (firstword[index] !== strs[i][index]){
+            return prefix
+        } 
+
+      }
+        
+    }
+
+    }
+
+    
+    return prefix
+    
+};
