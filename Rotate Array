@@ -1,0 +1,31 @@
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+
+//Notes
+
+//Input: nums = array of numbers, k = number (not negative)
+//Output: an array - rotate the array to right by k step (numbers at the end rotate to the beginning in order starting from the end of the array)
+
+//Approaches - pseudocode
+//while k > 0
+//nums.pop
+//nums.unshift(nums.pop)
+//k-=1
+
+//Time Complexity - while loop (O(k)), pop() O(1) b/c elements do not shift for nums, unshift O(n) b/c elements need to shift. Time Complexity is O(n * k) 
+//Space Complexity is O(1) b/c we're modifying the original array in-place
+
+var rotate = function(nums, k = 0) {
+    
+    while(k > 0){
+        let lastElement = nums.pop()
+        nums.unshift(lastElement)
+        k -= 1
+    }
+    
+    return nums
+    
+};
