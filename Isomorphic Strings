@@ -1,0 +1,70 @@
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+
+//Notes:
+//Input: 2 strings (s, t)
+//Output - Boolean - if characters in s can be replaced to get t. 
+//Observations: same letters have the same value, a character can map to itself (a can equal a)
+
+//Aproaches
+//check to see unique characters
+//make e = a
+//take e out and make it only a in the future
+//make g equal d
+//take g out and make it only d in the future
+
+//if character already exists, use that letter (hash table)
+//otherwise the letter of s will equal the next letter of t
+//check to see if the strings are the same
+
+
+
+var isIsomorphic = function(s, t) {
+    
+    let hashTable = {};
+    
+    //change s to an array so that we can manipulate values at certain indexes.
+    let sValue = s.split('');
+    
+    //loops through each character of s, s is also same length as t. 
+    for(let i = 0; i < sValue.length; i ++){
+        
+        let prop = sValue[i]
+        
+        //check to see if char from string s already exists in the hashtable
+        if(hashTable.hasOwnProperty(sValue[i]) === true){
+            
+            //assign hashTable value to our string
+            sValue[i] = hashTable[prop]
+            
+        } else {
+            //check if t[i] already exists as a value, so we do not duplicate values
+            if(!Object.values(hashTable).includes(t[i])){
+                
+                //change the first character of s to the first character of t, while storing the key value pair in the hash table
+                 hashTable[prop] = t[i]
+                 sValue[i] = t[i]
+                
+            } else {
+                
+                //return false because two characters cannot map to the same value
+                return false
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    //change sValue to a string
+    sValue = sValue.join('')
+
+    
+    return sValue === t
+    
+    
+};
