@@ -1,0 +1,30 @@
+function theJanitor(word) {
+
+let alphaStorage = {};
+let result = [];
+const alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+for(let i = 0; i < word.length; i++){
+  if(!alphaStorage.hasOwnProperty(word[i])){
+    let firstIndex = i;
+    let lastIndex = word.lastIndexOf(word[i]);
+    let substring = word.slice(firstIndex, lastIndex + 1);
+    alphaStorage[word[i]] = substring.length
+  }
+
+}
+
+for (let x = 0; x < alphabet.length; x++){
+  if(alphaStorage.hasOwnProperty(alphabet[x])) {
+    result.push(alphaStorage[alphabet[x]])
+  } else {
+    result.push(0)
+  }
+}
+
+return result
+
+}
+
+let answer = theJanitor("abacaba")
+console.log(answer)
