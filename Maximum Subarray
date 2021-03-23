@@ -1,0 +1,79 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+
+/*
+Input: array of numbers (positive and negative, and greater than 1)
+Output: Integer representing sum of values in contiguous array. 
+
+What I know: 
+- we will not want a contiguous array with negative numbers in the front, or in the back. 
+- get array combinations of possible contiguous arrays, and store it in a obj
+- iterate through obj to get highest value. 
+
+*/
+
+var maxSubArray = function (nums) {
+  //edge case, only 1 value in the input array
+  if (nums.length < 2) {
+    return nums[0];
+  }
+
+  let maxNum = Math.max(...nums);
+
+  if (maxNum <= 0) {
+    return maxNum;
+  }
+
+  //array will store all the possible combinations
+  let contiguousCombos = [];
+
+  //will get reassigned, tracks the beginning and end of subarrays that we will push into        contiguousCombos storage
+  let startIndex = 0;
+  let endIndex = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    //we are only interested in the currentValue as a startIndex if it is greater than 0. Else, we will skip this iteration.
+    let currentValue = nums[i];
+
+    if (currentValue > 0) {
+      startIndex = i;
+      endIndex = i;
+      contiguousCombos.push(nums.slice(i, i + 1));
+    } else {
+      continue;
+    }
+
+    for (let x = i + 1; x < nums.length; x++) {
+      //all possible contiguous array combinations with a positive integer at the end are added to our storage called contiguousCombos
+      if (nums[x] > 0) {
+        endIndex = x;
+        contiguousCombos.push(nums.slice(i, x + 1));
+      }
+    }
+  }
+
+  //go to our helper function to find the largest sum possible from our stored combinations
+  let largestSum = findLargestSum(contiguousCombos);
+
+  return largestSum;
+};
+
+function findLargestSum(arr) {
+  let largestSum = 0;
+
+  arr.forEach(function (subArray, index, array) {
+    //reduce adds up the numbers in our subarrays
+    let sum = subArray.reduce(function (accumulator, currentValue) {
+      return accumulator + currentValue;
+    }, 0);
+
+    //if the new sum is larger than largestSum, largestSum gets reassigned to the larger value. Otherwise, nothing happens.
+    if (sum > largestSum) {
+      largestSum = sum;
+    }
+  });
+
+  return largestSum;
+}
