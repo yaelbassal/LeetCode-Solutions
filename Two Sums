@@ -30,7 +30,7 @@ Approaches:
  - loop through the whole array and see if a number matches. 
 */
 
-Approach #2:
+Approach #2: This is the better solution. It has a better space complexity. 
 
 var twoSum = function(nums, target) {
     
@@ -54,6 +54,9 @@ var twoSum = function(nums, target) {
     return outputArr
     
 };
+
+Time Complexity: O(n^2)
+Space Complexity: O(1)
 
 ---------------------------------------------------------------
 Approach #1:
@@ -91,3 +94,6 @@ function searchValueStorage(searchNum, valueStorage){
     }
     
 }
+
+Time Complexity: O(n * m)
+Space Complexity: O(n) b/c of valueStorage
