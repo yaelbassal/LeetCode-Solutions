@@ -14,6 +14,7 @@ What I know:
 
 */
 
+//Approach #1
 var maxSubArray = function (nums) {
   //edge case, only 1 value in the input array
   if (nums.length < 2) {
@@ -76,4 +77,71 @@ function findLargestSum(arr) {
   });
 
   return largestSum;
+}
+
+//Approach #2
+
+var maxSubArray = function (nums) {
+  //edge case, only 1 value in the input array
+  if (nums.length < 2) {
+    return nums[0];
+  }
+
+  let maxNum = Math.max(...nums);
+  
+//if max number is negative, return largest negative number.
+  if (maxNum <= 0) {
+    return maxNum;
+  }
+
+  //array will store one combination at a time. Will take up less space than last solution.
+  //let contiguousCombos;
+
+  //will get reassigned, tracks the beginning and end of subarrays that we will push into        contiguousCombos storage
+  let startIndex = 0;
+  let endIndex = 0;
+  let largestSum = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    //we are only interested in the currentValue as a startIndex if it is greater than 0. Else, we will skip this iteration.
+    let currentValue = nums[i];
+
+    if (currentValue > 0) {
+      startIndex = i;
+      endIndex = i + 1;
+    //call the helper function to calculate the sum of the subarray
+      let subarrayOneValSum = findLargestSum(nums.slice(startIndex, endIndex));
+      if (subarrayOneValSum > largestSum){
+        largestSum = subarrayOneValSum
+      }
+    } else {
+      continue;
+    }
+
+    for (let x = i + 1; x < nums.length; x++) {
+
+      if (nums[x] > 0) {
+        endIndex = x + 1;
+        //call the helper function to calculate the sum of the subarray
+        let subarraySum = findLargestSum(nums.slice(startIndex, endIndex));
+
+        if (subarraySum > largestSum){
+          largestSum = subarraySum
+        }
+      }
+    }
+  }
+
+
+  return largestSum;
+};
+
+function findLargestSum(arr) {
+
+    let sum = arr.reduce(function (accumulator, currentValue) {
+      return accumulator + currentValue;
+    }, 0);
+
+
+  return sum;
 }
