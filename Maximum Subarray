@@ -39,8 +39,8 @@ var maxSubArray = function (nums) {
 
     if (currentValue > 0) {
       startIndex = i;
-      endIndex = i;
-      contiguousCombos.push(nums.slice(i, i + 1));
+      endIndex = i + 1;
+      contiguousCombos.push(nums.slice(startIndex, endIndex));
     } else {
       continue;
     }
@@ -48,8 +48,8 @@ var maxSubArray = function (nums) {
     for (let x = i + 1; x < nums.length; x++) {
       //all possible contiguous array combinations with a positive integer at the end are added to our storage called contiguousCombos
       if (nums[x] > 0) {
-        endIndex = x;
-        contiguousCombos.push(nums.slice(i, x + 1));
+        endIndex = x + 1;
+        contiguousCombos.push(nums.slice(startIndex, endIndex));
       }
     }
   }
