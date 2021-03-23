@@ -1,0 +1,93 @@
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+
+/*
+Input: array and target sum 
+Output: Array of 2 indicies that add up to target sum
+
+Constraints:
+Input will be larger than two.
+Only one valid answer exists. 
+We are working with both positive and negative integers
+We must check for identical indexes. Numbers are not unique.
+
+
+Approaches:
+#1 - this approach is a little more complicated b/c numbers are not unique, and we need unique props. Slower than approach #2. 
+- push all numbers of array into an obj where prop = index and val = number
+- for loop
+ target - x = ?
+ find ? in the obj -
+ if this is true, return x + prop
+ if this is false, continue....
+  
+#2:
+ nested for loops 
+ - current word
+ - loop through the whole array and see if a number matches. 
+*/
+
+Approach #2:
+
+var twoSum = function(nums, target) {
+    
+    let outputArr = [];
+    
+    for(let i = 0; i < nums.length; i++){
+        const currentVal = nums[i];
+        const searchingFor = target - currentVal;
+        
+        for(let x = 0; x < nums.length; x++){
+            
+            if(x != i && searchingFor === nums[x]){
+                outputArr.push(i);
+                outputArr.push(x);
+                return outputArr
+            }
+            
+        }
+    }
+    
+    return outputArr
+    
+};
+
+---------------------------------------------------------------
+Approach #1:
+
+var twoSum = function(nums, target) {
+    
+    let valueStorage = {};
+    let output = [];
+    
+    for(let i = 0; i < nums.length; i++){
+        valueStorage[i] = nums[i]
+    }
+    
+    for(let x = 0; x < nums.length; x++){
+        let currentVal = nums[x];
+        let searchingFor = target - nums[x]
+        
+        let index = searchValueStorage(searchingFor, valueStorage)
+        
+        if(index && index != x){
+            output.push(x);
+            output.push(index)
+            return output
+        }
+        
+    }    
+};
+
+function searchValueStorage(searchNum, valueStorage){
+    
+    for(key in valueStorage){
+        if (valueStorage[key] === searchNum){
+            return key
+        }
+    }
+    
+}
