@@ -1,0 +1,36 @@
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+
+/**
+ * Space Complexity: O(1) b/c mainpulating the input array only
+ * Time Complexity : O(n^2) b/c of splice
+ */
+ 
+Approach#1:
+
+var moveZeroes = function(nums) {
+    
+    let numOfZeros = 0;
+    
+    for(let i = 0; i < nums.length; i++){
+        if(nums[i] === 0){
+          numOfZeros += 1
+        }
+    }
+    
+    for(let j = 0; j < nums.length; j++){
+        if(nums[j] === 0){
+            nums.splice(j, 1)
+            j--
+        }
+    }
+    
+    while(numOfZeros > 0){
+        nums.push(0)
+        numOfZeros--
+    }
+    
+    return nums
+};
