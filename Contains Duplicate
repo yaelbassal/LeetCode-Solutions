@@ -1,0 +1,28 @@
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+
+/**
+ * input: array integers
+ * output: boolean (true if any value appears twice, false if every element is distinct.)
+ *
+ * Space Complexity: O(n) b/c hash map
+ * Time Complexity: O(n) b/c for loop
+ */
+
+
+var containsDuplicate = function(nums) {
+    
+    let storeValues = new Set();
+    
+    for(let i = 0; i < nums.length; i++){
+        if(storeValues.has(nums[i])){
+            return true
+        } else {
+            storeValues.add(nums[i])
+        }
+    }
+    
+    return false
+};
