@@ -1,0 +1,32 @@
+//Time Complexity: O(n)
+//Space Complexity: O(1)b/c changing linked list in place. 
+
+var reverseList = function(head) {
+    
+    if(!head || !head.next){
+        return head
+    }
+
+    let prev = null;
+    let currentNode = head;
+    let next = head.next;
+    
+    while(currentNode != null){
+        
+        //store currentNode's nested obj in next variable
+        next = currentNode.next
+        
+        //set currentNode's next value to prev (starts as null, but then value gets reassigned...see code)
+        currentNode.next = prev; 
+        
+        //reassign prev to the currentNode, b/c in the next iteration, it will be the previous node. 
+        prev = currentNode; 
+        
+        //set the currentNode to the next value for next iteration. (while loop will break when currentNode becomes null) 
+        currentNode = next; 
+    }
+    
+    //return the node as prev b/c it is the most recent node to have all the previous values added to it. 
+    return prev
+    
+};
