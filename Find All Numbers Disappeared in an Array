@@ -1,0 +1,46 @@
+/* 
+Input: Array of Integers
+Output: Array (of nums within range of 1 and n that do not appear in nums)
+
+Things I notice:
+- range is inclusive of n
+- numbers are 1 or greater
+- nums[i] will be a value between 1 and n
+- edge case can be one value in an array where we have to return an empty array.
+
+Approach:
+- find value n (other numbers will need to be compared to the number 1 and n)
+- create a set to store numbers from nums array - for loop to add integers from nums to set. 
+- while loop to loop through all numbers between 1 - n and see if they are in my set.   And, if the number is not in the set, just push it into the return array.
+*/
+
+//Time Complexity: O(a + b) & Space Complexity is O(n)
+
+var findDisappearedNumbers = function(nums) {
+    
+    const n = nums.length; //Space Complexity: O(1)
+    const numsStorage = new Set(); //Space Complexity: O(n)
+    let counter = 1; //Space Complexity: O(1)
+    let disappearedNums = []; //Space Complexity: O(n)
+    
+    //add all numbers from nums to our storage set object. 
+    for(let i=0; i < nums.length; i++){//Time: for loop O(n)
+        if(!numsStorage.has(nums[i])){//Time: lookup O(1)
+            numsStorage.add(nums[i])//Time: insert O(1)
+        }
+    }
+    
+    //compare counter to values in numsStorage
+    while(counter <= n){ //Time: for loop O(n)
+        if(!numsStorage.has(counter)){//Time: look up O(1)
+            disappearedNums.push(counter)//Time: insert to end of an array O(1)
+        }
+        
+        counter +=1
+    }
+    
+    
+    return disappearedNums
+    
+    
+};
