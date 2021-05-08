@@ -1,0 +1,79 @@
+//BigO Time Complexity: O(n^3), Space Complexity: O(n) 
+
+function wordCombinations(intString){
+  
+const hashTable = {
+
+  1: "abc",
+  2: "def",
+  3: "ghi",
+  4: "jkl",
+  5: "mno",
+  6: "pqrs",
+  7: "tuv",
+  8: "wxyz",
+  
+};
+  
+let intStringArray = intString.split('');
+
+  
+let tempNewCombinations = [];
+
+let newCombinations = [];
+  
+
+
+  for(let i=0; i < intStringArray.length; i++){
+    
+    
+    let possibleLetters = hashTable[intStringArray[i]]
+    
+    console.log(possibleLetters)
+    
+    
+    if(newCombinations.length < 1){
+      
+      
+      for(let j=0; j<possibleLetters.length; j++){
+        
+        newCombinations.push(possibleLetters[j])
+        
+      
+      } 
+    
+    } else {
+        
+        for(let k=0; k<newCombinations.length; k++){
+        
+            for(let y=0; y<possibleLetters.length; y++){
+        
+             tempNewCombinations.push(newCombinations[k] + possibleLetters[y])
+              
+      
+            }
+          
+
+        
+         }
+      
+      newCombinations = [...tempNewCombinations];
+      tempNewCombinations = [];
+          
+          
+    } //end of else statement
+    
+    
+    
+    
+    }//end of outer for loop
+   
+  return newCombinations
+
+  
+  }
+
+
+
+
+wordCombinations("118")
