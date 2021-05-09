@@ -1,4 +1,4 @@
-//BigO Time Complexity: O(n^3), Space Complexity: O(n) 
+//BigO Time Complexity: O(n^3), Space Complexity: O(n * 4^n) 
 
 function wordCombinations(intString){
   
@@ -18,10 +18,9 @@ const hashTable = {
 let intStringArray = intString.split(''); //Space Complexity: O(1)
 
   
-let tempNewCombinations = []; //Space Complexity: O(n)
+let tempNewCombinations = []; //Space Complexity: O(n * 4^n)
 
-let newCombinations = []; //Space Complexity: O(n)
-  
+let newCombinations = []; //Space Complexity: O(n * 4^n)
 
 
   for(let i=0; i < intStringArray.length; i++){ //Space Complexity: O(1) b/c memory is reused)
