@@ -24,10 +24,10 @@ let newCombinations = []; //Space Complexity: O(n)
   
 
 
-  for(let i=0; i < intStringArray.length; i++){ //Space Complexity: O(n)(b/c for loop will run O(n) times.) or is it O(1) b/c it memory is reused?)
+  for(let i=0; i < intStringArray.length; i++){ //Space Complexity: O(1) b/c memory is reused)
     
     
-    let possibleLetters = hashTable[intStringArray[i]] //Space Complexity: O(n)(b/c for loop will run O(n) times.) or is it O(1) b/c it memory is reused?)
+    let possibleLetters = hashTable[intStringArray[i]] //Space Complexity: O(1) b/c memory is reused)
     
     
     if(newCombinations.length < 1){ 
@@ -42,9 +42,9 @@ let newCombinations = []; //Space Complexity: O(n)
     
     } else {
         
-        for(let k=0; k<newCombinations.length; k++){ //Space Complexity: O(n)(b/c for loop will run O(n) times.) or is it O(1) b/c it memory is reused?)
+        for(let k=0; k<newCombinations.length; k++){ //Space Complexity: O(1) b/c memory is reused)
         
-            for(let y=0; y<possibleLetters.length; y++){ //Space Complexity: O(n)(b/c for loop will run O(n) times.) or is it O(1) b/c it memory is reused?)
+            for(let y=0; y<possibleLetters.length; y++){ //Space Complexity: O(1) b/c memory is reused)
         
              tempNewCombinations.push(newCombinations[k] + possibleLetters[y])
               
@@ -55,8 +55,8 @@ let newCombinations = []; //Space Complexity: O(n)
         
          }
       
-      newCombinations = [...tempNewCombinations]; //Space Complexity: O(n)(b/c for loop will run O(n) times.) or is it O(1) b/c it memory is reused?)
-      tempNewCombinations = []; //Space Complexity: O(n)(b/c for loop will run O(n) times.) or is it O(1) b/c it memory is reused?)
+      newCombinations = [...tempNewCombinations]; //Space Complexity: O(1) b/c memory is reused)
+      tempNewCombinations = []; //Space Complexity: O(1) b/c memory is reused)
           
           
     } //end of else statement
