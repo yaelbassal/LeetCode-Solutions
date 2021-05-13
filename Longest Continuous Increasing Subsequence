@@ -95,3 +95,61 @@ var findLengthOfLCIS = function(nums) {
     return increaseTrackerHighestValue
     
 };
+
+_______________________________________________________________________________________________________________________________________________________________
+
+
+Solution C (similar to Solution B):
+
+
+//Time Complexity: O(n), Space Complexity: O(1)
+var findLengthOfLCIS = function(nums) {
+    
+    if(nums.length < 2){
+        return nums.length
+    }
+    
+    //tracks the largest length value of increasing numbers in nums
+    let increaseTrackerHighestValue = 0;
+    
+    //temporarily tracks number of increments
+    let tempIncreasingTracker = 0;
+    
+    //tracks previous value in the array
+    let previous;
+    
+    for(let i=0; i < nums.length; i++){ //Time Complexity: O(n)
+        
+        let currentNum = nums[i];
+        
+        if(previous === undefined || previous === null || currentNum > previous){
+           tempIncreasingTracker  += 1;
+        } else if(currentNum <= previous){
+            //replace increaseTrackerHighestValue only if tempIncreasingTracker is higher than it.
+            if(tempIncreasingTracker > increaseTrackerHighestValue){
+                increaseTrackerHighestValue  = tempIncreasingTracker;
+            }
+            //either way, reset the temp tracker because numbers are no longer incrementing.
+            tempIncreasingTracker = 1;
+        }
+                
+        //if at the end of the nums array, make sure compare the two trackers for the highest number
+        if(i === nums.length - 1){
+          if(tempIncreasingTracker > increaseTrackerHighestValue){
+                increaseTrackerHighestValue = tempIncreasingTracker;
+                return increaseTrackerHighestValue
+            }
+        }
+        
+        //allows algo to return early, may not have to go through the entire for loop. 
+        if(increaseTrackerHighestValue >= (nums.length - i + 1) && currentNum > nums[i+1]){
+            return increaseTrackerHighestValue
+        }
+        
+        previous = currentNum
+
+    }
+
+    return increaseTrackerHighestValue
+    
+};
