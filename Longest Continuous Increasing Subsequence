@@ -1,0 +1,40 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+
+//Time Complexity: O(n), Space Complexity: O(n)
+var findLengthOfLCIS = function(nums) {
+    
+    //store all length values of incrementing numbers in a array
+    let continuousSubsequences = []; //Space Complexity: O(n)
+    
+    //temporarily tracks number of increments
+    let tempIncreasingTracker = 0;
+    
+    //tracks previous value in the array
+    let previous;
+    
+    for(let i=0; i < nums.length; i++){ //Time Complexity: O(n)
+        
+        let currentNum = nums[i];
+        
+        if(previous === undefined || previous === null || currentNum > previous){
+           tempIncreasingTracker  += 1;
+        } else if(currentNum <= previous){
+            //push tempIncreaseTracker value into the array
+            continuousSubsequences.push(tempIncreasingTracker);
+            //reset the temp tracker because numbers are no longer incrementing. We reset it to one rather then  0 because we are starting with a new number. 
+            tempIncreasingTracker = 1;
+        }
+                
+        //if at the end of the nums array, make sure to add the tracker value to the continuousSubsequences array, otherwise it will not be included. 
+        if(i === nums.length - 1){
+          continuousSubsequences.push(tempIncreasingTracker);
+        }
+        
+        previous = currentNum
+
+    }
+
+    return Math.max(...continuousSubsequences) //Time Complexity: O(n)
