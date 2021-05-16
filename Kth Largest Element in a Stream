@@ -1,0 +1,54 @@
+Solution A: 
+
+Time Complexity: O(m^2) m => this.stream because of sort() method. 
+Space Complexity: O(1)
+
+var KthLargest = function(k, nums) {
+    this.k = k;
+    this.stream = nums;
+};
+
+KthLargest.prototype.add = function(val) {
+    //add new value and sort the stream in ascending order. 
+    this.stream.push(val)
+    this.stream.sort((a, b) => a - b)
+    
+    let streamLength = this.stream.length
+    let atIndex = streamLength - this.k
+    return this.stream[atIndex]    
+};
+
+
+Solution B:
+
+Time Complexity: O(m^2) m => this.stream, but only runs once initially. Nested loop happens later only under special circumstances, improving time complexity.
+Space Complexity: O(1)
+
+var KthLargest = function(k, nums) {
+    this.k = k;
+    //only sorts here, reduces time complexity. 
+    this.stream = nums.sort((a,b) => a - b); //Time Complexity: O(m^2)
+};
+
+KthLargest.prototype.add = function(val) {
+
+    let maxVal = Math.max(...this.stream) //Time Complexity: O(m)
+    
+    //if val is larger than all other numbers in nums, add to the end of the array. 
+    if(maxVal <= val){
+        this.stream.push(val)
+    } else { 
+        //insert val into the array
+        for(let i=0; i < this.stream.length; i++){ //Time Complexity: O(m)
+        
+            if(val <= this.stream[i]){
+                this.stream.splice(i, 0, val) //Time Complexity: O(m)
+                break;
+            }
+        } 
+    }
+    
+    let streamLength = this.stream.length
+    let atIndex = streamLength - this.k
+    return this.stream[atIndex]    
+};
