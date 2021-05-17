@@ -1,0 +1,62 @@
+Solution A:
+
+//Time Complexity: O(n), Space Complexity: O(1)
+
+var peakIndexInMountainArray = function(arr) {
+    
+    //initialize peak variable to -1 because all values in the array will be 0 or greater. 
+    let peak = -1;
+    
+    for(let i=0; i < arr.length; i++){
+        
+        //compare the current array element to peak. If the value is greater, than replace peak with the new value.     
+        if(arr[i] > peak){
+            peak = arr[i]
+        }
+    } 
+    
+    //return the index of final peak value, this is the highest value in the array. 
+    return arr.indexOf(peak)
+    
+};
+
+________________________________________________________________________________________________________________________________________________________________
+
+Solution B (Improved Time Complexity):
+
+//Time Complexity: O(log(n)), Space Complexity: O(1)
+
+var peakIndexInMountainArray = function(arr) {
+    
+    //find the middle of the array, and will also act as a pointer
+    let middleIndexOfMountain = Math.floor((arr.length-1)/2)
+    
+    //stores value of index to be returned
+    let result;
+    
+    //if the mountain is initially inclining        
+    if(arr[middleIndexOfMountain] < arr[middleIndexOfMountain + 1]) {
+         
+        //increment our "pointer" until the mountain starts declining. 
+        while(arr[middleIndexOfMountain] < arr[middleIndexOfMountain + 1]) {
+            
+            result = middleIndexOfMountain + 1
+            middleIndexOfMountain++ 
+
+        }
+        
+    //if the mountain is initially declining 
+    } else if(arr[middleIndexOfMountain] > arr[middleIndexOfMountain + 1]) {
+        
+        //decrement our "pointer" until the mountain starts declining. 
+        while(arr[middleIndexOfMountain] > arr[middleIndexOfMountain + 1]) {
+            
+            result = middleIndexOfMountain
+            middleIndexOfMountain-- 
+
+        }
+    } 
+    
+    
+    return result
+};
