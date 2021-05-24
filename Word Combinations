@@ -63,6 +63,8 @@ function wordCombinations(intString) {
 
 wordCombinations("117");
 
+______________________________________________________________________________________________________________________________________________________________
+
 SOLUTION B:
 
 function wordCombinations(intString) {
