@@ -1,76 +1,64 @@
-//BigO Time Complexity: O(n^3), Space Complexity: O(n * 4^n) 
 
-function wordCombinations(intString){
-  
-const hashTable = {
+SOLUTION A:
 
-  1: "abc",
-  2: "def",
-  3: "ghi",
-  4: "jkl",
-  5: "mno",
-  6: "pqrs",
-  7: "tuv",
-  8: "wxyz",
-  
-}; //Space Complexity: O(1)
-  
-let intStringArray = intString.split(''); //Space Complexity: O(1)
+//BigO Time Complexity: O(n^3), Space Complexity: O(n * 4^n)
 
-  
-let tempNewCombinations = []; //Space Complexity: O(n * 4^n)
+function wordCombinations(intString) {
+  //fake list of valid words for "117" combination
+  const dictionary = ["act", "cat", "bat"];
 
-let newCombinations = []; //Space Complexity: O(n * 4^n)
+  const hashTable = {
+    1: "abc",
+    2: "def",
+    3: "ghi",
+    4: "jkl",
+    5: "mno",
+    6: "pqrs",
+    7: "tuv",
+    8: "wxyz",
+  }; //Space Complexity: O(1)
 
+  let intStringArray = intString.split(""); //Space Complexity: O(1)
 
-  for(let i=0; i < intStringArray.length; i++){ //Space Complexity: O(1) b/c memory is reused)
-    
-    
-    let possibleLetters = hashTable[intStringArray[i]] //Space Complexity: O(1) b/c memory is reused)
-    
-    
-    if(newCombinations.length < 1){ 
-      
-      
-      for(let j=0; j<possibleLetters.length; j++){ //Space Complexity: O(1)
-        
-        newCombinations.push(possibleLetters[j])
-        
-      
-      } 
-    
+  let tempNewCombinations = []; //Space Complexity: O(n * 4^n)
+
+  let newCombinations = []; //Space Complexity: O(n * 4^n)
+
+  for (let i = 0; i < intStringArray.length; i++) {
+    //Space Complexity: O(1) b/c memory is reused)
+
+    let possibleLetters = hashTable[intStringArray[i]]; //Space Complexity: O(1) b/c memory is reused)
+
+    if (newCombinations.length < 1) {
+      for (let j = 0; j < possibleLetters.length; j++) {
+        //Space Complexity: O(1)
+
+        newCombinations.push(possibleLetters[j]);
+      }
     } else {
-        
-        for(let k=0; k<newCombinations.length; k++){ //Space Complexity: O(1) b/c memory is reused)
-        
-            for(let y=0; y<possibleLetters.length; y++){ //Space Complexity: O(1) b/c memory is reused)
-        
-             tempNewCombinations.push(newCombinations[k] + possibleLetters[y])
-              
-      
-            }
-          
+      for (let k = 0; k < newCombinations.length; k++) {
+        //Space Complexity: O(1) b/c memory is reused)
 
-        
-         }
-      
+        for (let y = 0; y < possibleLetters.length; y++) {
+          //Space Complexity: O(1) b/c memory is reused)
+
+          tempNewCombinations.push(newCombinations[k] + possibleLetters[y]);
+        }
+      }
+
       newCombinations = [...tempNewCombinations]; //Space Complexity: O(1) b/c memory is reused)
       tempNewCombinations = []; //Space Complexity: O(1) b/c memory is reused)
-          
-          
     } //end of else statement
-    
-    
-    
-    
-    }//end of outer for loop
-   
-  return newCombinations 
+  } //end of outer for loop
 
-  
-  }
+  const result = newCombinations.filter((word) => {
+    //returns a new array called result that includes only the valid words from the newCombinations array
+    if(dictionary.includes(word)){
+      return word
+    }
+  })
 
+  return result;
+}
 
-
-
-wordCombinations("118")
+wordCombinations("117");
