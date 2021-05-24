@@ -62,3 +62,67 @@ function wordCombinations(intString) {
 }
 
 wordCombinations("117");
+
+SOLUTION B:
+
+function wordCombinations(intString) {
+  //fake list of valid words for "117" combination
+  const dictionary = ["act", "cat", "bat"];
+
+  //hash table stores letter values correlating to each number
+  const hashTable = {
+    1: "abc",
+    2: "def",
+    3: "ghi",
+    4: "jkl",
+    5: "mno",
+    6: "pqrs",
+    7: "tuv",
+    8: "wxyz",
+  };
+
+  //splits input string into an array, example: "[ '1', '1', '7' ]"
+  let intStringArray = intString.split("");
+
+  //stores valid letter combinations temporarily
+  let tempNewCombinations = [];
+
+  //stores valid letter combinations
+  let newCombinations = [];
+
+  for (let i = 0; i < intStringArray.length; i++) {
+
+    //outer for loop, iterates through the input number array and creates a variable with all possible letter values for each number as a string.
+    let possibleLetters = hashTable[intStringArray[i]];
+
+    //if this is the first time going through the outer for loop
+    if (newCombinations.length < 1) {
+      for (let j = 0; j < possibleLetters.length; j++) {
+        //add each possible letter to newCombinations. This array will need to be used going forward to add new letters to the end of the words.
+        newCombinations.push(possibleLetters[j]);
+      }
+    } else {//otherwise...
+      //Using a nested for loop, for each word in newCombinations array, concate to the end all possible letters from the value of intStringArr[i].. Add these new values to tempNewCombinations only if they are valid.
+      for (let k = 0; k < newCombinations.length; k++) {
+        for (let y = 0; y < possibleLetters.length; y++) {
+          let newPossibleWord = newCombinations[k] + possibleLetters[y];
+
+          dictionary.forEach((word) => {
+            if (word.startsWith(newPossibleWord) && !tempNewCombinations.includes(newPossibleWord)) {
+              tempNewCombinations.push(newPossibleWord);
+            }
+          });
+        }
+      }
+
+      newCombinations = [...tempNewCombinations];
+
+      tempNewCombinations = [];
+    } //end of else statement
+  } //end of outer for loop
+
+
+  return newCombinations;
+}
+
+wordCombinations("117");
