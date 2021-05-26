@@ -4,6 +4,10 @@
 
 //For example: fibonacciRecursive(6) should return 8
 
+Solution A:
+
+
+//Time Complexity: O(n), Space Complexity: O(1)
 function fibonacciIterative(n){
 
   let firstValue = 0;
@@ -21,6 +25,11 @@ function fibonacciIterative(n){
 
 fibonacciIterative(6);
 
+______________________________________________________________________________________________________________________
+
+Solution B:
+
+//Time Complexity: O(2^n), Space Complexity: O(1)
 function fibonacciRecursive(n) {
   //base case because when the index of n is 0 or 1, its integer value is also always 0 and 1.
   if(n < 2){
