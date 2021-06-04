@@ -1,0 +1,66 @@
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+//Time Complexity: O(n log n); Space Complexity: O(n)
+function mergeSort (array) {
+  //base case
+  if (array.length === 1) {
+    return array
+  }
+  // split Array in into right and left
+  let middleIndex = Math.floor(array.length/2)
+
+  //slice method returns a shallow copy of a portion of an array
+  let left = array.slice(0, middleIndex);
+  let right = array.slice(middleIndex)
+
+  return merge(
+    mergeSort(left),
+    mergeSort(right)
+  )
+
+}
+
+function merge(left, right) {
+  let mergedValues = [];
+  let leftLength = left.length;
+  let rightLength = right.length;
+  let leftCounter = 0;
+  let rightCounter = 0;
+
+  while (leftCounter < leftLength || rightCounter < rightLength) {
+
+    //if a value from the left array and right array both exist.
+    if (left[leftCounter] !== undefined && right[rightCounter] !== undefined) {
+      if (left[leftCounter] > right[rightCounter]) {
+        mergedValues.push(right[rightCounter]);
+        rightCounter++;
+      }
+
+      if (left[leftCounter] < right[rightCounter]) {
+        mergedValues.push(left[leftCounter]);
+        leftCounter++;
+      }
+
+      //"===" in case there are repeating numbers
+      if (left[leftCounter] === right[rightCounter]) {
+        mergedValues.push(left[leftCounter]);
+        mergedValues.push(right[rightCounter]);
+        leftCounter++;
+        rightCounter++;
+      }
+      //if values only exist from the left array (they are already sorted from previous calls to merge)
+    } else if (left[leftCounter] && right[rightCounter] === undefined) {
+      mergedValues.push(left[leftCounter]);
+      leftCounter++;
+      //if values only exist from the right array (they are already sorted from previous calls to merge)
+    } else if (right[rightCounter] && left[leftCounter] === undefined) {
+      mergedValues.push(right[rightCounter]);
+      rightCounter++
+    }
+  }
+
+  return mergedValues;
+}
+
+const answer = mergeSort(numbers);
+console.log(answer);
