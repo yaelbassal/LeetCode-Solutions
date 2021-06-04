@@ -1,0 +1,34 @@
+const numbers = [99, 44, 6, 2, 1, 5, 63, 87, 283, 4, 0];
+
+//Time and Space Complexity: O(n^2), O(1)
+
+function selectionSort(array) {
+  //declare variables
+  let smallestValue;
+  let smallestValueIndex;
+
+  for (let i = 0; i < array.length; i++) {
+    //reassign variables to values of array[i] every time we iterate through the outer loop
+    smallestValue = array[i];
+    smallestValueIndex = i;
+
+    //always start the inner loop with the variable "j" one value after the outer loop start point
+    for (let j = i + 1; j < array.length; j++) {
+      //find the new smallest value. If the smallest value is at array[i], do not do anything, otherwise....
+      if (array[j] < smallestValue) {
+        smallestValue = array[j];
+        smallestValueIndex = j;
+      }
+
+      //if at the end of a iteration of the inner loop, modify the array.
+      if (j === array.length - 1) {
+        array[smallestValueIndex] = array[i];
+        array[i] = smallestValue;
+      }
+    }
+  }
+
+  return array;
+}
+
+selectionSort(numbers);
