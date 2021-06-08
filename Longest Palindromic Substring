@@ -1,4 +1,4 @@
-Solution A: 
+Solution A: Brute Force
 
 var longestPalindrome = function (s) {
   //if there is only one letter in the string, return the letter.
