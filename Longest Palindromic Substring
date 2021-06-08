@@ -42,3 +42,54 @@ function backwards(str) {
 
   return backwards;
 }
+
+Solution B: In Progress...
+
+
+var longestPalindrome = function (s) {
+  if (s.length === 1) {
+    return s;
+  }
+
+  //temp variable temporarily stores potential substrings
+  let temp;
+  //string variable gets reassigned to new value every time i is incremented
+  let string = s;
+  //initalize result to first letter of string input
+  let result = string[0];
+
+  for (let i = 0; i < string.length; i++) {
+    string = s.slice(i);
+    //inner loop decrements in order to access the largest possible palindromic substrings first
+    for (let j = string.length; j > 0; j--) {
+      temp = string.slice(0, j);
+      //only if first and last value of the string match....
+      if (temp[0] === temp[temp.length - 1]) {
+        let backwardsTemp = backwards(temp);
+        if (temp === backwardsTemp) {
+          if (result.length < temp.length) {
+            result = temp;
+          }
+        }
+      }
+      
+      //if the length of result is larger or equal to the length of our current string, return result because there cannot be a longer palindromic substring
+      if (result.length >= string.length) {
+        return result;
+      }
+    }
+  }
+
+  return result;
+};
+
+function backwards(str) {
+  let backwards = "";
+
+  for (let i = str.length - 1; i > -1; i--) {
+    backwards += str[i];
+  }
+
+  return backwards;
+}
+
