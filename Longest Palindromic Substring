@@ -1,0 +1,44 @@
+Solution A: 
+
+var longestPalindrome = function (s) {
+  //if there is only one letter in the string, return the letter.
+  if (s.length === 1) {
+    return s;
+  }
+  
+  //else...
+  let result = s[0];
+  //the temp variable temporarily stores every possible substring
+  let temp = "";
+  let len = s.length;
+
+  //for loops iterate through all possible substring possibilities
+  for (let i = 0; i < len; i++) {
+    for (let j = i; j < len; j++) {
+      temp += s[j];
+      let backwardsTemp = backwards(temp);
+      if (temp === backwardsTemp) {
+        if (result.length < temp.length) {
+          result = temp;
+        }
+      }
+      
+      //if inner loop is at the end of the string, reassign temp to an empty string. 
+      if (j === len - 1) {
+        temp = "";
+      }
+    }
+  }
+
+  return result;
+};
+
+function backwards(str) {
+  let backwards = "";
+
+  for (let i = str.length - 1; i >= 0; i--) {
+    backwards += str[i];
+  }
+
+  return backwards;
+}
