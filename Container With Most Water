@@ -7,6 +7,7 @@ var maxArea = function(height) {
     let largestAmountOfWater = 0;
     let spaceBetweenLines = height.length - 1
     
+    //leftCounter is assigned the index at the beginning of the input array, and rightCounter is assigned the last index of the input array
     let leftCounter = 0
     let rightCounter = height.length - 1
     
@@ -14,15 +15,17 @@ var maxArea = function(height) {
         
         let temp;
         
+        //calculate area of water based on lowest line. 
+        
         if(height[leftCounter] <= height[rightCounter]){
             temp = height[leftCounter] * spaceBetweenLines
             leftCounter++
-            spaceBetweenLines-- 
-        } else if (height[leftCounter] > height[rightCounter]){
+        } else {
             temp = height[rightCounter] * spaceBetweenLines
-            rightCounter--
-            spaceBetweenLines--
+            rightCounter--     
         }
+        
+        spaceBetweenLines--
         
         if(temp > largestAmountOfWater){
             largestAmountOfWater = temp
