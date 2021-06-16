@@ -1,0 +1,45 @@
+//Time Complexity => O(n^3) Space Complexity => O(n * 4^n)
+var letterCombinations = function (digits) {
+    
+  const values = {
+    "2": "abc",
+    "3": "def",
+    "4": "ghi",
+    "5": "jkl",
+    "6": "mno",
+    "7": "pqrs",
+    "8": "tuv",
+    "9": "wxyz",
+  };
+
+  let letterCombinations = [];
+  let temp = [];
+
+  if (digits.length === 0) {
+    return letterCombinations;
+  }
+
+  if (digits.length === 1) {
+    return values[digits].split("");
+  }
+
+  for (let i = 0; i < digits.length; i++) {
+    let possibleValues = values[digits[i]];
+    let arr = possibleValues.split("");
+
+    if (i === 0) {
+      arr.forEach((element) => letterCombinations.push(element));
+    } else {
+      for (let j = 0; j < letterCombinations.length; j++) {
+        for (let k = 0; k < arr.length; k++) {
+          temp.push(letterCombinations[j].concat(arr[k]));
+        }
+      }
+
+      letterCombinations = [...temp];
+      temp = [];
+    }
+  }
+
+  return letterCombinations;
+};
