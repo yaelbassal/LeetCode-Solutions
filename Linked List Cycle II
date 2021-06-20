@@ -1,0 +1,31 @@
+//Solution A:  => Time Complexity O(n); Space Complexity O(n)
+
+var detectCycle = function(head) {
+    
+    if(!head || head.next === null){
+        return null
+    }
+    
+    
+    let currentNode = head
+    let nodeStorage = new Map()
+    let index = 0;
+    
+    while(currentNode.next !== null){
+        
+        if(nodeStorage.has(currentNode)){
+            return currentNode
+        } else {
+            nodeStorage.set(currentNode, index)
+        }
+        
+                
+        index++
+        currentNode = currentNode.next
+    }
+    
+    return null
+    
+};
+
+//Solution B: in progress - use pointers. 
