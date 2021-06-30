@@ -1,0 +1,71 @@
+/*
+
+Notes:
+ - arrays can have positive and negative integers
+ - the length of the array is 2 => 10^6 inclusive
+ - can contain duplicates
+ 
+ Possible Approaches:
+ Solution A:
+ While loop (while input.length > 0)
+   - for loop => 
+   Iterate through the array finding the largest and then the smallest values
+   Push the values into a new array
+   delete the values from the original array
+   
+ Solution B: Better solution/Faster
+ Sort the array first => Next steps could be: write a function that sorts the array faster rather than using built in js sort. 
+ Find the middle index of the sorted array, slice the array into two arrays with the max nums and min nums seperated
+ alternate between the two arrays pushing to a new array
+*/
+
+
+//Solution B: Time Complexity: O(n log n), Space Complexity: O(n)
+function meanderingArray(unsorted) {
+    
+    //sort the input array
+    let sorted = unsorted.sort((a,b) => a - b);
+    
+    //find the middle index of the array. Note: Math.floor returns largest integer less than or equal to a given number. 
+    let middleIndex = Math.floor(sorted.length/2)
+    
+    let smallestValues = sorted.slice(0, middleIndex)
+    
+    //if there is an odd number of elements in the array, the larger numbers will need the extra value because they are called first in the meandering array. 
+    let largestValues = sorted.slice(middleIndex)
+    
+    //uses a helper function to return a array in meandering order
+    let meanderingOrder = mergeArrays(smallestValues, largestValues)
+
+    return meanderingOrder
+}
+
+//Helper function to merge the arrays in alternating order. 
+function mergeArrays(smallest, largest){
+    
+    let lenOfSmallest = smallest.length;
+    let lenOfLargest = largest.length;
+    let smallestCounter = 0;
+    let largestCounter = lenOfLargest - 1;
+    let result = [];
+    
+    //in the while loop, increment the smallest counter (iterate through the array forwards) and decrement the largest counter (iterate through the array backwards)
+    
+    while(smallestCounter < lenOfSmallest || largestCounter >= 0){
+          
+        if(largest[largestCounter] && smallest[smallestCounter]){
+            result.push(largest[largestCounter])
+            result.push(smallest[smallestCounter])
+            largestCounter--
+            smallestCounter++
+        } else {
+            //largest always has the extra value b/c of how it is sliced in meanderingArray function
+            result.push(largest[largestCounter])
+            largestCounter--
+        }
+        
+    }
+    
+
+    return result    
+}
