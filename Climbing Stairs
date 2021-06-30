@@ -1,0 +1,31 @@
+//Dynamic Programming Solution: Time Complexity: O(n), Space Complexity: O(n)
+
+function climbStairs() {
+  //cache stores key value pairs. key => # of stairs, value => # of possible steps
+  //use closure to avoid global variables
+  let cache = {};
+  return function steps(n) {
+    //if cache[n] exists, return its value.
+    if (n in cache) {
+      return cache[n];
+    } else {
+      //for loop starts at step 1 and caclulates values for numbers of steps not yet seen.
+      for (let i = 1; i <= n; i++) {
+        if (!cache[i]) {
+          if (i === 1 || i === 2) {
+            cache[i] = i;
+          } else {
+            cache[i] = cache[i - 1] + cache[i - 2];
+          }
+        }
+      }
+      //return the number of steps for the input value.
+      return cache[n];
+    }
+  };
+}
+
+
+const steps = climbStairs();
+console.log(steps(5));
+console.log(steps(10));
