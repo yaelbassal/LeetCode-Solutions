@@ -1,4 +1,6 @@
-//Dynamic Programming Solution: Time Complexity: O(n), Space Complexity: O(n)
+/*
+Solution A: Dynamic Programming Solution => Time Complexity: O(n), Space Complexity: O(n)
+*/
 
 function climbStairs() {
   //cache stores key value pairs. key => # of stairs, value => # of possible steps
@@ -29,3 +31,32 @@ function climbStairs() {
 const steps = climbStairs();
 console.log(steps(5));
 console.log(steps(10));
+
+/*
+Solution B: Time Complexity: O(n), Space Complexity O(n)
+*/
+
+var climbStairs = function(n) {
+    
+    //stores key value pairs where key => # of stairs, value => # of possible steps
+    let valueStorage = {}
+    
+    //return if the input is 1 or 2. Always equal to possible steps. 
+    if(n == 1 || n == 2){
+        return n
+    }
+    
+    for(let i=1; i <= n; i++){
+      
+        if(i === 1 || i === 2){
+            valueStorage[i] = i
+        } else {
+            //pattern: the # of steps for any number, is the sum of the number of steps of the two previous numbers.
+            valueStorage[i] = valueStorage[i-1] + valueStorage[i-2]
+        }
+          
+        
+    }
+    
+    return valueStorage[n]
+};
