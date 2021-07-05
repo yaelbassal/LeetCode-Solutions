@@ -1,4 +1,4 @@
-//Solution A: Time Complexity O(n^2), Space Complexity O(1)
+//Solution A: Time Complexity O(n^2) Loop runs n(n-1)/2 times, Space Complexity O(1)
 
 var maxProfit = function (prices) {
   let greatestProfit = 0;
@@ -25,7 +25,7 @@ var maxProfit = function (prices) {
   return greatestProfit;
 };
 
-//Solution B: Time Complexity O(n^2), Space Complexity O(n^2)
+//Solution B: Time Complexity O(n^2) Loop runs n(n-1)/2 times, Space Complexity O(n^2)
 
 var maxProfit = function (prices) {
   let cache = new Set();
