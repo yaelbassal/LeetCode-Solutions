@@ -57,3 +57,54 @@ var maxProfit = function (prices) {
 
   return greatestProfit;
 };
+
+
+// Solution C: Optimal Solution => Time Complexity O(n), Space Complexity O(1)
+
+var maxProfit = function (prices) {
+  let greatestProfit = 0;
+
+  if (prices.length === 1) {
+    return greatestProfit;
+  }
+  
+  //slow pointer  
+  let buyPointer = 0;
+    
+  //fast pointer
+  let sellPointer = 1;
+  
+    
+  while(sellPointer < prices.length){
+      
+      //if the buying price is less than the selling price....
+      if(prices[buyPointer] < prices[sellPointer]){
+          
+          //calculate profit
+          let profit = prices[sellPointer] - prices[buyPointer]
+          
+          //update greatest profit if statement is true
+          if(profit > greatestProfit){
+              greatestProfit = profit
+          }
+          
+          //increment sellPointer
+          sellPointer++
+      }
+      
+      //if the selling price is less than the buying price
+      if(prices[buyPointer] >= prices[sellPointer]){
+          
+          //move the buyPointer to the index of lower price in the prices array (currently the value of sellPointer). 
+          //Note: profits for the buyPointer have already been calculated. This new lower buying price will have a greater profit as we come across new possible selling prices.  
+          buyPointer = sellPointer
+          sellPointer++
+          
+      }
+      
+  }
+    
+    
+  return greatestProfit;
+};
+
