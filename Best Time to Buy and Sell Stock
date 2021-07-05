@@ -1,0 +1,59 @@
+//Solution A: Time Complexity O(n^2), Space Complexity O(1)
+
+var maxProfit = function (prices) {
+  let greatestProfit = 0;
+
+  if (prices.length === 1) {
+    return greatestProfit;
+  }
+
+  //in for loop, for every buying price possibility, selling price possibilities start at one index after it. 
+  for (let i = 0; i < prices.length; i++) {
+    let buyPrice = prices[i];
+    for (let j = i + 1; j < prices.length; j++) {
+      let sellPrice = prices[j];
+      //check if there can be profit from the transaction. If there is, compare the value with the value at greatestProfit. 
+      if (sellPrice > buyPrice) {
+        let profit = sellPrice - buyPrice;
+        if (profit > greatestProfit) {
+          greatestProfit = profit;
+        }
+      }
+    }
+  }
+
+  return greatestProfit;
+};
+
+//Solution B: Time Complexity O(n^2), Space Complexity O(n^2)
+
+var maxProfit = function (prices) {
+  let cache = new Set();
+  let greatestProfit = 0;
+
+  if (prices.length === 1) {
+    return greatestProfit;
+  }
+
+  for (let i = 0; i < prices.length; i++) {
+    let buyPrice = prices[i];
+    for (let j = i + 1; j < prices.length; j++) {
+      let sellPrice = prices[j];
+
+      if (sellPrice > buyPrice) {
+        let profit = sellPrice - buyPrice;
+        cache.add(profit);
+      }
+    }
+  }
+
+  if (cache.size > 0) {
+    cache.forEach(function (val) {
+      if (val > greatestProfit) {
+        greatestProfit = val;
+      }
+    });
+  }
+
+  return greatestProfit;
+};
