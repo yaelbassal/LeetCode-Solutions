@@ -1,0 +1,33 @@
+
+//Dynamic Programming Solution: Time Complexity: O(n) Space Complexity: O(n)
+var rob = function(nums) {
+    
+    //edge cases
+    if(nums.length === 0){
+        return 0
+    } else if(nums.length === 1){
+        return nums[0]
+    } else if(nums.length === 2){
+        return Math.max(nums[0], nums[1])
+    } else {
+        //if the array has 3 or more elements....
+        
+        //stores the max amount of money for a given length of nums as we increment through nums.
+        //Example: nums = [1,2,3,1] maxMoney = [1, 2, 4, 4]
+        let maxMoney = []; 
+        
+        maxMoney[0] = nums[0];
+        maxMoney[1] = Math.max(nums[0], nums[1])
+                
+        for(let i=2; i < nums.length; i++){
+            
+            //check which scenario is greater. Add the larger value to maxMoney array. 
+            maxMoney[i] = Math.max(nums[i] + maxMoney[i-2], maxMoney[i - 1])
+            
+        }
+        
+        return maxMoney[nums.length - 1]
+
+    }
+    
+};
