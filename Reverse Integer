@@ -1,0 +1,43 @@
+var reverse = function(x) {
+    
+    //edge case
+    if(x.toString().length === 1){
+        return x
+    }
+    
+    //turn the integer input into an array
+    let intArray = x.toString().split("");
+    let len = intArray.length;
+    
+    //array stores the integer values in reverse
+    let reverseArr = [];
+    let result;
+    
+    //checks for a 0 at the end of x
+    if(intArray[len-1] === "0"){
+        intArray = intArray.slice(0, len-1)
+    }
+    
+    //if we have a negative input number, push the negative symbol into reverse array before iterating backwards through the rest of the array
+    if(intArray[0] === "-"){
+        reverseArr.push(intArray[0]);
+        for(let i=intArray.length - 1; i > 0; i--){
+         reverseArr.push(intArray[i])
+         }       
+    } else { //otherwise iterate backwards through the array pushing values into reverseArr
+        for(let i=intArray.length - 1; i >= 0; i--){
+         reverseArr.push(intArray[i])
+         }      
+    }
+    
+    //convert the array to a string and then to a number
+    result = Number(reverseArr.join(""))
+    
+    //check to see if our result is outside of the 32-bit integer range 
+     if(result > (Math.pow(2, 31) -1) || result < Math.pow(-2, 31)){
+        return 0
+    } else {
+         return result
+     }
+        
+};
