@@ -1,0 +1,25 @@
+//Space Complexity: O(1), Time Complexity O(n^2)
+
+var removeDuplicates = function(nums) {
+    
+    if(nums.length <= 1){
+        return nums.length
+    }
+    
+    
+    let numOfUnderscores = 0;
+    
+    for(let i=0; i < nums.length; i++){
+        if(nums[i] === nums[i+1]){
+            nums.splice(i, 1)
+            numOfUnderscores += 1
+            i--
+        }
+    }
+    
+    for(let j=0; j < numOfUnderscores; j++){
+        nums.push("_")
+    }
+    
+    return nums.length - numOfUnderscores
+};
